@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time & Revenue Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Time & Revenue Tracker</h1>
+            <p>Gestione ore lavorate e tracciamento compensi</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Area Notifiche -->
+        <div id="notification-area"></div>
+
+        <div class="grid-layout">
+            <!-- Colonna Sinistra: Inserimento e Gestione -->
+            <div class="column">
+                <!-- Sezione Inserimento Dati -->
+                <section id="section-entry" class="card">
+                    <h2>Registra Nuova Attività</h2>
+                    <form id="form-entry">
+                        <div class="form-group">
+                            <label for="entry-date">Data:</label>
+                            <input type="date" id="entry-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="entry-hours">Ore Lavorate (es. 4.5):</label>
+                            <input type="number" id="entry-hours" step="0.25" min="0.25" required placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="entry-rate">Tariffa Oraria (€):</label>
+                            <input type="number" id="entry-rate" step="0.01" min="0" required placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="entry-desc">Descrizione / Progetto:</label>
+                            <input type="text" id="entry-desc" required placeholder="Specifica l'attività svolta">
+                        </div>
+                        <button type="submit" class="btn-primary">Salva Registrazione</button>
+                    </form>
+                </section>
+
+                <!-- Sezione Strumenti Dati -->
+                <section id="section-tools" class="card">
+                    <h2>Gestione Dati</h2>
+                    <div class="tools-container">
+                        <button id="btn-export" class="btn-secondary">Esporta Dati (JSON)</button>
+                        <label for="input-import" class="btn-secondary custom-file-upload">
+                            Importa Dati (JSON)
+                        </label>
+                        <input type="file" id="input-import" accept=".json" style="display: none;">
+                    </div>
+                </section>
+            </div>
+
+            <!-- Colonna Destra: Report e Storico -->
+            <div class="column">
+                <!-- Sezione Motore di Reporting -->
+                <section id="section-report" class="card">
+                    <h2>Genera Report Finanziario</h2>
+                    <form id="form-report">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="report-start">Data Inizio:</label>
+                                <input type="date" id="report-start" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="report-end">Data Fine:</label>
+                                <input type="date" id="report-end" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Calcola Report</button>
+                    </form>
+                    
+                    <!-- Container Risultati Report (Nascosto di default) -->
+                    <div id="report-results" class="results-container hidden">
+                        <!-- Iniettato dinamicamente da JavaScript (View) -->
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Sezione Storico Registrazioni (Full Width) -->
+        <section id="section-history" class="card mt-2">
+            <h2>Storico Completo Attività</h2>
+            <div class="table-responsive">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrizione</th>
+                            <th>Ore</th>
+                            <th>Tariffa (€/h)</th>
+                            <th>Totale (€)</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <!-- Righe iniettate dinamicamente da JavaScript (View) -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Time & Revenue Tracker - Architettura MVC</p>
+    </footer>
+
+    <!-- Moduli JavaScript: Assicurati di creare questi 3 file nella stessa cartella -->
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="controller.js"></script>
+</body>
+</html>
